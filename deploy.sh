@@ -4,6 +4,8 @@ log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') : $1"
 }
 
+log "Running pre-deployment checks..."
+
 log "Starting Deployment..."
 echo "----------------------"
 
