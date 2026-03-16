@@ -1,53 +1,57 @@
 #!/bin/bash
 
-echo "Starting Deployment..."
+log() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') : $1"
+}
+
+log "Starting Deployment..."
 echo "----------------------"
 
 if [ ! -d ".git" ]
 then
-  echo "Not a git repository. Deployment aborted."
+  log "Not a git repository. Deployment aborted."
   exit 1
 fi
-echo "Git repository detected."
+log "Git repository detected."
 
 
-echo "Checking for uncommitted changes..."
+log "Checking for uncommitted changes..."
 
 if [ -n "$(git status --porcelain)" ]
 then
-  echo "Uncommitted changes detected. Please commit first."
+  log "Uncommitted changes detected. Please commit first."
   exit 1
 fi
-echo "Working directory clean."
+log "Working directory clean."
 
 
-echo "Pulling latest code from repository..."
+log "Pulling latest code from repository..."
 git pull
 
 
-echo "Checking required files..."
+log "Checking required files..."
 
 if [ ! -f "app.py" ]
 then
-  echo "app.py not found. Deployment failed."
+  log "app.py not found. Deployment failed."
   exit 1
 fi
-echo "app.py found."
+log "app.py found."
 
 
-echo "Building application..."
-
-sleep 2
-
-echo "Build completed successfully."
-
-
-echo "Starting application..."
+log "Building application..."
 
 sleep 2
 
-echo "Application started successfully."
+log "Build completed successfully."
+
+
+log "Starting application..."
+
+sleep 2
+
+log "Application started successfully."
 
 
 echo "----------------------"
-echo "Deployment completed successfully!"
+log "Deployment completed successfully!"
